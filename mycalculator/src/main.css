@@ -19,26 +19,40 @@
     width: 100%;
     height: 30%;
     background-color: rgb(49, 49, 49);
+    border-radius: 10px;
+    color: white;
+    padding: 1vw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
 }
 
 .lower{
     width: 100%;
     height: 70%;
     display: flex;
-    justify-content: space-around;
+    gap: 10px;
     flex-wrap: wrap;
+    margin-top: 1vh;
 }
 
 .lower button{
     width: 23%;
     height: 18%;
+    background-color: gray;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .lower .result{
-    height: 36%;
+    height: 38%;
 }
 
 .last-row{
     position: relative;
-    top: -23%;
+    top: -20%;
 }
