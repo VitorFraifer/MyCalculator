@@ -56,3 +56,47 @@
     position: relative;
     top: -20%;
 }
+
+@media screen and (max-width: 1440px) {
+    .lower button{
+        width: 22%;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .calculatorContainer{
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .calculatorContainer{
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .calculatorContainer{
+        width: 60%;
+        padding: 4vw;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .calculatorContainer{
+        width: 90%;
+        padding: 5vw;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+    .calculatorContainer{
+        width: 90%;
+        padding: 5vw;
+    }
+
+    .lower button{
+        width: 21%;
+    }
+}

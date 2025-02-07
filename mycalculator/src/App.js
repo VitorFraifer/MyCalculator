@@ -1,44 +1,34 @@
 import React, { useState } from "react";
-import './main.css';
+import "./main.css";
 
 function App() {
+  const [calc, setCalc] = useState("");
+  const [displayedValue, setDisplayedValue] = useState("0");
 
-  const [calc, setCalc] = useState([]);
-  const [displayedValue, setdisplayedValue] = useState("teste");
-
-  const contentToDisplay = document.querySelector(".displayContent")
-
-  function clearDisplay(){
-    contentToDisplay.innerText = "";
-    setCalc([]);
+  function clearDisplay() {
+    setCalc("");
+    setDisplayedValue("0");
   }
 
-  function eraseLastElement(arrayOfElements){
-    arrayOfElements.pop();
-    console.log(arrayOfElements);
-    contentToDisplay.innerText = "";
+  function eraseLastElement() {
+    setCalc((prev) => prev.slice(0, -1));
+    setDisplayedValue((prev) => prev.length > 1 ? prev.slice(0, -1) : "0");
   }
 
-  function getElement(element){
-    calc.push(element)
-    console.log(calc)
+  function getItemAndDisplay(value) {
+    setCalc((prev) => prev + value);
+    setDisplayedValue((prev) => (prev === "0" ? value : prev + value));
   }
 
-  function displayValue(value){
-    setdisplayedValue(value)
-  }
-
-  function getItemAndDisplay(value){
-    getElement(value);
-    displayValue(value);
-  }
-
-  function calculateExpression(arrayOfItens){
-    const stringExpression = arrayOfItens.join(" ")
-    const result = eval(stringExpression);
-    console.log(result);
-
-    return result;
+  function calculateExpression() {
+    try {
+      const result = eval(calc); // PERIGO: `eval` pode ser perigoso, veja nota abaixo.
+      setCalc(result.toString());
+      setDisplayedValue(result.toString());
+    } catch (error) {
+      setDisplayedValue("Erro");
+      setCalc("");
+    }
   }
 
   return (
@@ -48,10 +38,10 @@ function App() {
           <p className="displayContent">{displayedValue}</p>
         </div>
         <div className="lower">
-          <button onClick={() => clearDisplay()}>AC</button>
-          <button>%</button>
-          <button>/</button>
-          <button>X</button>
+          <button onClick={clearDisplay}>AC</button>
+          <button onClick={() => getItemAndDisplay("%")}>%</button>
+          <button onClick={() => getItemAndDisplay("/")}>/</button>
+          <button onClick={() => getItemAndDisplay("*")}>X</button>
           <button onClick={() => getItemAndDisplay("7")}>7</button>
           <button onClick={() => getItemAndDisplay("8")}>8</button>
           <button onClick={() => getItemAndDisplay("9")}>9</button>
@@ -63,10 +53,10 @@ function App() {
           <button onClick={() => getItemAndDisplay("1")}>1</button>
           <button onClick={() => getItemAndDisplay("2")}>2</button>
           <button onClick={() => getItemAndDisplay("3")}>3</button>
-          <button className="result" onClick={() => calculateExpression(calc)}>=</button>
+          <button className="result" onClick={calculateExpression}>=</button>
           <button className="last-row" onClick={() => getItemAndDisplay("0")}>0</button>
           <button className="last-row" onClick={() => getItemAndDisplay(".")}>.</button>
-          <button className="last-row" onClick={() => eraseLastElement(calc)}>Del</button>
+          <button className="last-row" onClick={eraseLastElement}>Del</button>
         </div>
       </div>
     </section>
